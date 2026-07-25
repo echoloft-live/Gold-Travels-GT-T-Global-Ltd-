@@ -96,10 +96,12 @@ export function App() {
             <div className="w-10 h-10 rounded-full bg-[#111111] flex items-center justify-center shadow-[0_0_0_1px_rgba(201,162,39,0.35)] overflow-hidden p-1">
               <img src="/src/assets/logo.png" alt="GT&T Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="font-display text-2xl font-semibold text-white tracking-wide">
-              Gold <em className="not-italic bg-gradient-to-r from-[#E9CE7E] to-[#C9A227] bg-clip-text text-transparent">Travels</em>.ng
-            </span>
-          </a>
+            {/* <span className="font-display text-2xl font-semibold text-white tracking-wide"> */}
+              <span className="font-display text-2xl font-semibold tracking-wide" style={{ color: "#C9A227" }}>
+                Gold Travels
+              </span>
+         
+            </a>
 
           <nav className="hidden lg:flex items-center space-x-8">
             <a href="#home" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">Home</a>
