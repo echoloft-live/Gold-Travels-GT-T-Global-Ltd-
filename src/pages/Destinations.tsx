@@ -4,6 +4,22 @@ import { PackageCard } from '../components/PackageCard';
 import { FlightPathDivider } from '../components/FlightPathDivider';
 import { Search, MessageCircle, ArrowRight } from 'lucide-react';
 
+// List of featured country destinations
+const FEATURED_DESTINATIONS = [
+  'France',
+  'Italy',
+  'Barcelona',
+  'Doha',
+  'Zanzibar',
+  'Indonesia',
+  'Seychelles',
+  'Singapore',
+  'Greece',
+  'China',
+  'South Africa',
+  'UK'
+];
+
 export const Destinations: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,6 +45,20 @@ export const Destinations: React.FC = () => {
           <p className="text-sm sm:text-base text-[#F6F1E7]/80 leading-relaxed">
             Explore our curated selection of luxury escapes. From vibrant Dubai and historic London to overwater Maldives hideaways, every trip is managed with impeccable Abuja concierge care.
           </p>
+        </div>
+
+        {/* Featured Destinations Pills */}
+        <div className="max-w-3xl mx-auto flex flex-wrap gap-2 justify-center mb-10">
+          {FEATURED_DESTINATIONS.map((dest, idx) => (
+            <button
+              key={dest}
+              type="button"
+              className="px-5 py-2.5 rounded-full border border-[#C9A227]/40 text-sm font-semibold text-[#F6F1E7] bg-[#C9A227]/5 hover:bg-[#C9A227]/15 transition"
+              onClick={() => setSearchTerm(dest)}
+            >
+              {dest}
+            </button>
+          ))}
         </div>
 
         {/* Search Bar */}

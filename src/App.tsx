@@ -170,14 +170,14 @@ export function App() {
         <div className="relative z-10 w-full pb-24">
           <div className="max-w-[1240px] mx-auto px-4 sm:px-8 max-w-[900px]">
             <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold inline-flex items-center gap-2 mb-4 reveal in">
-              <span className="w-7 h-[1px] bg-[#C9A227]"></span>
+              {/* <span className="w-7 h-[1px] bg-[#C9A227]"></span> */}
               Gold Travels & Tours (GT&T) Global Ltd
             </span>
             <h1 className="text-white text-[clamp(40px,6vw,76px)] leading-[1.05] font-display font-semibold mb-5 reveal in" style={{ transitionDelay: '0.1s' }}>
               Explore the World<br/>with <span className="italic bg-gradient-to-r from-[#E9CE7E] to-[#C9A227] bg-clip-text text-transparent">Confidence</span>
             </h1>
             <p className="text-white/80 text-lg max-w-[560px] mb-10 font-normal reveal in" style={{ transitionDelay: '0.2s' }}>
-              Your trusted partner for flights, visas, study abroad, vacations and unforgettable experiences — planned with care, delivered without stress.
+              Your trusted partner for flights, visas, study abroad, vacations and unforgettable experiences planned with care, delivered without stress.
             </p>
             <div className="flex gap-4 flex-wrap mb-14 reveal in" style={{ transitionDelay: '0.3s' }}>
               <a href="#contact" className="px-8 py-4 rounded-full font-bold text-sm bg-[#C9A227] text-[#1a1400] shadow-xl hover:-translate-y-1 transition-all">
@@ -217,7 +217,7 @@ export function App() {
         <div className="max-w-[1240px] mx-auto px-8">
           <div className="max-w-2xl mb-14 reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2">
-              <span className="w-7 h-[1px] bg-[#C9A227]"></span> What We Offer
+              What We Offer
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Every step of your journey, arranged in one place</h2>
             <p className="text-gray-600 mt-4 text-base">From the first flight search to the last stamp in your passport, our consultants handle the details so your trip stays effortless.</p>
@@ -250,7 +250,7 @@ export function App() {
         <div className="max-w-[1240px] mx-auto px-8 relative z-10">
           <div className="max-w-2xl mb-16 reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold inline-flex items-center gap-2">
-              <span className="w-7 h-[1px] bg-[#C9A227]"></span> Why Choose Us
+               Why Choose Us
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-white">Travel planning that feels like a trusted second opinion</h2>
             <p className="text-white/60 mt-4 text-base">We've guided thousands of Nigerian travelers through flights, visas and relocations — with the paperwork handled and the guesswork removed.</p>
@@ -286,7 +286,7 @@ export function App() {
         <div className="max-w-[1240px] mx-auto px-8">
           <div className="max-w-2xl mb-16 reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2">
-              <span className="w-7 h-[1px] bg-[#C9A227]"></span> Featured Destinations
+              Featured Destinations
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Places our travelers keep going back to</h2>
             <p className="text-gray-600 mt-4 text-base">A shortlist of the routes we book most — each one planned door to door.</p>
@@ -323,17 +323,31 @@ export function App() {
           </div>
           <div className="reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2">
-              <span className="w-7 h-[1px] bg-[#C9A227]"></span> Study Abroad
+              Study Abroad
             </span>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold mt-4 mb-6">Your admission letter is just the beginning</h2>
             <p className="text-gray-600 text-base mb-8">We guide students from application to arrival — matching you with schools, handling your visa file and arranging travel so you land ready to start.</p>
             
             <div className="flex flex-wrap gap-2.5 mb-8">
-              {['United Kingdom', 'Canada', 'USA', 'Australia', 'Ireland'].map((country, idx) => (
+              {[
+                'France',
+                'Italy',
+                'Barcelona',
+                'Doha',
+                'Zanzibar',
+                'Indonesia',
+                'Seychelles',
+                'Singapore',
+                'Greece',
+                'China',
+                'South Africa',
+                'UK'
+              ].map((country, idx) => (
                 <span key={idx} className="px-5 py-2.5 rounded-full border border-[#C9A227]/40 text-sm font-semibold text-[#111111] bg-[#C9A227]/5">
                   {country}
                 </span>
               ))}
+         
             </div>
 
             <ul className="space-y-4 mb-10 text-gray-700 font-medium">
@@ -355,7 +369,7 @@ export function App() {
         <div className="max-w-[1240px] mx-auto px-8 relative z-10">
           <div className="max-w-2xl mb-16 reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold inline-flex items-center gap-2">
-              <span className="w-7 h-[1px] bg-[#C9A227]"></span> Testimonials
+              Testimonials
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-white">Trusted by travelers across Nigeria</h2>
           </div>
@@ -398,7 +412,7 @@ export function App() {
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
           <div className="max-w-2xl mb-10 sm:mb-16 reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2">
-              <span className="w-7 h-[1px] bg-[#C9A227]"></span> Get In Touch
+              Get In Touch
             </span>
             <h2 className="text-3xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Tell us where you're headed</h2>
             <p className="text-gray-600 mt-4 text-base">Share a few details and a travel consultant will reach out within one business day.</p>
