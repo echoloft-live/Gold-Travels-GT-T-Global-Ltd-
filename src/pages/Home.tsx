@@ -5,7 +5,6 @@ import { SERVICES, TRAVEL_PACKAGES, TESTIMONIALS, COMPANY_INFO } from '../data/m
 import { ServiceCard } from '../components/ServiceCard';
 import { PackageCard } from '../components/PackageCard';
 import { TestimonialCard } from '../components/TestimonialCard';
-import { QuoteWidget } from '../components/QuoteWidget';
 import { FlightPathDivider } from '../components/FlightPathDivider';
 
 export const Home: React.FC = () => {
@@ -57,7 +56,7 @@ export const Home: React.FC = () => {
 
         {/* Multi-Tab Quote Widget anchored over lower third of hero */}
         <div className="relative z-20 max-w-6xl mx-auto px-4 w-full -mb-16">
-          <QuoteWidget />
+          {/* <QuoteWidget /> */}
         </div>
       </section>
 

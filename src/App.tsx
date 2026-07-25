@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { COMPANY_INFO, SERVICES, TRAVEL_PACKAGES, TESTIMONIALS } from './data/mockData';
-import { QuoteWidget } from './components/QuoteWidget';
 import { ContactForm } from './components/ContactForm';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Phone, Mail, MapPin, MessageCircle, ArrowRight, Award, ShieldCheck, Clock, Quote, Plane, FileCheck, GraduationCap, Building2, Car, Palmtree, HeartHandshake } from 'lucide-react';
@@ -208,7 +207,7 @@ export function App() {
       <section className="pt-8 pb-16 bg-white relative z-20">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
           <div className="max-w-4xl mx-auto sm:-mt-24 relative z-30 shadow-2xl rounded-2xl overflow-hidden bg-white border border-[#C9A227]/30">
-            <QuoteWidget />
+            {/* QuoteWidget was removed */}
           </div>
         </div>
       </section>
