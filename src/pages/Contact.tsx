@@ -92,9 +92,9 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Form Column */}
-          <div className="lg:col-span-2">
+          {/* <div className="lg:col-span-2"> */}
             <ContactForm />
-          </div>
+          {/* </div> */}
 
         </div>
 
