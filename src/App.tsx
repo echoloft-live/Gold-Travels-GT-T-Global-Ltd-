@@ -1,10 +1,20 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { COMPANY_INFO, SERVICES, TRAVEL_PACKAGES, TESTIMONIALS } from './data/mockData';
 import { QuoteWidget } from './components/QuoteWidget';
 import { ContactForm } from './components/ContactForm';
 import { WhatsAppButton } from './components/WhatsAppButton';
-import { Phone, Mail, MapPin, MessageCircle, ArrowRight, Award, ShieldCheck, Clock, Quote } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageCircle, ArrowRight, Award, ShieldCheck, Clock, Quote, Plane, FileCheck, GraduationCap, Building2, Car, Palmtree, HeartHandshake } from 'lucide-react';
+
+const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Plane,
+  FileCheck,
+  GraduationCap,
+  Building2,
+  Car,
+  Palmtree,
+  HeartHandshake,
+};
 
 export function App() {
   const [loaderHidden, setLoaderHidden] = useState(false);
@@ -82,7 +92,7 @@ export function App() {
 
       {/* Header */}
       <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 py-6 ${isScrolled ? 'bg-[#111111]/90 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent'}`}>
-        <div className="max-w-[1240px] mx-auto px-8 flex items-center justify-between">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-8 flex items-center justify-between">
           <a href="#home" className="flex items-center space-x-3 group">
             <div className="w-10 h-10 rounded-full bg-[#111111] flex items-center justify-center shadow-[0_0_0_1px_rgba(201,162,39,0.35)] overflow-hidden p-1">
               <img src="/src/assets/logo.png" alt="GT&T Logo" className="w-full h-full object-contain" />
@@ -159,7 +169,7 @@ export function App() {
         </svg>
 
         <div className="relative z-10 w-full pb-24">
-          <div className="max-w-[1240px] mx-auto px-8 max-w-[900px]">
+          <div className="max-w-[1240px] mx-auto px-4 sm:px-8 max-w-[900px]">
             <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold inline-flex items-center gap-2 mb-4 reveal in">
               <span className="w-7 h-[1px] bg-[#C9A227]"></span>
               Gold Travels & Tours (GT&T) Global Ltd
@@ -179,7 +189,7 @@ export function App() {
               </a>
             </div>
 
-            <div className="flex gap-12 border-t border-white/20 pt-7 flex-wrap reveal in" style={{ transitionDelay: '0.4s' }}>
+            <div className="flex gap-6 sm:gap-12 border-t border-white/20 pt-7 flex-wrap reveal in" style={{ transitionDelay: '0.4s' }}>
               <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="5000">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Happy Travelers</span></div>
               <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="100">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Destinations</span></div>
               <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="98">0</em>%</span><span className="text-xs uppercase tracking-wider text-white/60">Satisfaction</span></div>
@@ -195,9 +205,9 @@ export function App() {
       </section>
 
       {/* Quote Widget Section */}
-      <section className="py-16 bg-white relative z-20">
-        <div className="max-w-[1240px] mx-auto px-8">
-          <div className="max-w-4xl mx-auto -mt-32 relative z-30 shadow-2xl rounded-2xl overflow-hidden bg-white border border-[#C9A227]/30">
+      <section className="pt-8 pb-16 bg-white relative z-20">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
+          <div className="max-w-4xl mx-auto sm:-mt-24 relative z-30 shadow-2xl rounded-2xl overflow-hidden bg-white border border-[#C9A227]/30">
             <QuoteWidget />
           </div>
         </div>
@@ -219,8 +229,8 @@ export function App() {
               <div key={s.id} className="group bg-white border border-gray-200/80 rounded-2xl p-8 hover:bg-[#111111] hover:text-white transition-all duration-500 hover:-translate-y-1.5 shadow-sm relative overflow-hidden flex flex-col justify-between">
                 <span className="absolute top-6 right-6 font-display italic text-sm text-[#C9A227]/40">0{idx + 1}</span>
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-[#F8F9FA] group-hover:bg-white/10 flex items-center justify-center text-[#C9A227] group-hover:text-[#E9CE7E] mb-6 transition-colors">
-                    <span className="font-mono text-xs font-bold">{s.code}</span>
+                  <div className="w-12 h-12 rounded-xl bg-[#FBF7EE] group-hover:bg-white/10 flex items-center justify-center text-[#C9A227] group-hover:text-[#E9CE7E] mb-6 transition-colors">
+                    {(() => { const Icon = SERVICE_ICONS[s.iconName]; return Icon ? <Icon className="w-5 h-5" /> : null; })()}
                   </div>
                   <h4 className="font-display text-2xl font-semibold mb-3 group-hover:text-white">{s.title}</h4>
                   <p className="text-sm text-gray-600 group-hover:text-white/70 leading-relaxed mb-6">{s.shortDesc}</p>
@@ -385,48 +395,48 @@ export function App() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-28 bg-white" id="contact">
-        <div className="max-w-[1240px] mx-auto px-8">
-          <div className="max-w-2xl mb-16 reveal">
+      <section className="py-16 sm:py-28 bg-white" id="contact">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
+          <div className="max-w-2xl mb-10 sm:mb-16 reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2">
               <span className="w-7 h-[1px] bg-[#C9A227]"></span> Get In Touch
             </span>
-            <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Tell us where you're headed</h2>
+            <h2 className="text-3xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Tell us where you're headed</h2>
             <p className="text-gray-600 mt-4 text-base">Share a few details and a travel consultant will reach out within one business day.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 reveal">
-            <div className="lg:col-span-5 bg-[#111111] text-white rounded-2xl p-10 relative overflow-hidden flex flex-col justify-between">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 reveal">
+            <div className="lg:col-span-5 bg-[#111111] text-white rounded-2xl p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_100%,rgba(201,162,39,0.18),transparent_60%)] pointer-events-none"></div>
               <div className="relative z-10">
                 <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold block mb-2">Gold Travels and Tours (GT&T) Global Ltd</span>
-                <h3 className="text-2xl font-display font-semibold mb-8">Reach us directly</h3>
+                <h3 className="text-2xl font-display font-semibold mb-6 sm:mb-8">Reach us directly</h3>
                 
-                <div className="space-y-6">
-                  <div className="flex gap-4 pb-6 border-b border-white/10">
+                <div className="space-y-5">
+                  <div className="flex gap-4 pb-5 border-b border-white/10">
                     <MapPin className="w-5 h-5 text-[#E9CE7E] shrink-0 mt-1" />
                     <div><div className="text-[11px] uppercase tracking-wider text-white/50 mb-1">Address</div><div className="text-sm font-medium">{COMPANY_INFO.address}</div></div>
                   </div>
-                  <div className="flex gap-4 pb-6 border-b border-white/10">
+                  <div className="flex gap-4 pb-5 border-b border-white/10">
                     <Phone className="w-5 h-5 text-[#E9CE7E] shrink-0 mt-1" />
-                    <div><div className="text-[11px] uppercase tracking-wider text-white/50 mb-1">Phone</div><div className="text-sm font-medium font-mono">{COMPANY_INFO.phones[0]} · {COMPANY_INFO.phones[1]}</div></div>
+                    <div><div className="text-[11px] uppercase tracking-wider text-white/50 mb-1">Phone</div><div className="text-sm font-medium font-mono break-all">{COMPANY_INFO.phones[0]} · {COMPANY_INFO.phones[1]}</div></div>
                   </div>
-                  <div className="flex gap-4 pb-6 border-b border-white/10">
+                  <div className="flex gap-4 pb-5 border-b border-white/10">
                     <Mail className="w-5 h-5 text-[#E9CE7E] shrink-0 mt-1" />
-                    <div><div className="text-[11px] uppercase tracking-wider text-white/50 mb-1">Email</div><div className="text-sm font-medium font-mono">{COMPANY_INFO.email}</div></div>
+                    <div><div className="text-[11px] uppercase tracking-wider text-white/50 mb-1">Email</div><div className="text-sm font-medium font-mono break-all">{COMPANY_INFO.email}</div></div>
                   </div>
                 </div>
               </div>
 
-              <div className="relative z-10 mt-10">
-                <div className="h-32 rounded-xl bg-white/5 border border-dashed border-[#C9A227]/40 flex items-center justify-center text-xs text-white/60 gap-2">
+              <div className="relative z-10 mt-8">
+                <div className="h-28 rounded-xl bg-white/5 border border-dashed border-[#C9A227]/40 flex items-center justify-center text-xs text-white/60 gap-2">
                   <MapPin className="w-4 h-4 text-[#E9CE7E]" />
                   <span>Map preview — FCT, Abuja</span>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-7 bg-white border border-gray-200 rounded-2xl p-10 shadow-xl">
+            <div className="lg:col-span-7 bg-white border border-gray-100 rounded-2xl p-5 sm:p-10 shadow-sm">
               <ContactForm />
             </div>
           </div>

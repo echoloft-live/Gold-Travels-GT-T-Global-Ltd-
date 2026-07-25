@@ -39,6 +39,16 @@ body {
   overflow-x: hidden;
   background-color: #FFFFFF;
   color: #242220;
+  font-family: var(--font-sans);
+}
+
+/* ── Two-typeface system ────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+p, a, button, input, select, textarea, label, span, li {
+  font-family: var(--font-sans);
 }
 
 /* Flight Path Animation */
