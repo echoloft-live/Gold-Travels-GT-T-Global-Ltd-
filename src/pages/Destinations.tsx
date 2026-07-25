@@ -49,7 +49,7 @@ export const Destinations: React.FC = () => {
 
         {/* Featured Destinations Pills */}
         <div className="max-w-3xl mx-auto flex flex-wrap gap-2 justify-center mb-10">
-          {FEATURED_DESTINATIONS.map((dest, idx) => (
+          {FEATURED_DESTINATIONS.map((dest) => (
             <button
               key={dest}
               type="button"
