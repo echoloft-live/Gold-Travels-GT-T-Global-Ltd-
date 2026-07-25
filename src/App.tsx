@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import { COMPANY_INFO, SERVICES, TRAVEL_PACKAGES, TESTIMONIALS } from './data/mockData';
 import { QuoteWidget } from './components/QuoteWidget';
