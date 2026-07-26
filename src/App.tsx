@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import type { TouchEvent } from 'react';
 
 import { COMPANY_INFO, SERVICES, TRAVEL_PACKAGES, TESTIMONIALS } from './data/mockData';
 import { ContactForm } from './components/ContactForm';
@@ -15,11 +16,207 @@ const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>>
   HeartHandshake,
 };
 
+// Swiper logic for mobile testimonials carousel
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < breakpoint);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
+function MobileTestimonialsSwiper() {
+  const [current, setCurrent] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  // Go to previous slide
+  const prev = () => setCurrent((prev) => prev === 0 ? TESTIMONIALS.length - 1 : prev - 1);
+  // Go to next slide
+  const next = () => setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
+
+  function handleTouchStart(e: TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+  function handleTouchMove(e: TouchEvent) {
+    touchEndX.current = e.touches[0].clientX;
+  }
+  function handleTouchEnd() {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const dx = touchEndX.current - touchStartX.current;
+      if (Math.abs(dx) > 44) {
+        if (dx < 0) {
+          next();
+        } else {
+          prev();
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  }
+
+  return (
+    <div className="relative w-full max-w-md mx-auto">
+      <div
+        className="reveal"
+        style={{
+          transition: 'transform 0.4s cubic-bezier(.76,0,.24,1)',
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {TESTIMONIALS.map((t, idx) => (
+          <div
+            key={t.id}
+            className={`bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between relative absolute w-full left-0 top-0 transition-all duration-300
+                ${idx === current ? 'opacity-100 z-10 relative translate-x-0 scale-100 pointer-events-auto visible' : 'opacity-0 z-0 pointer-events-none scale-90 left-0'}
+             `}
+            style={{
+              visibility: idx === current ? "visible" : "hidden",
+              position: idx === current ? "relative" : "absolute",
+            }}
+          >
+            <Quote className="absolute top-6 right-6 w-10 h-10 text-white/10" />
+            <div>
+              <div className="text-[#E9CE7E] text-sm tracking-widest mb-4">★★★★★</div>
+              <p className="text-white/80 text-base italic leading-relaxed mb-8">"{t.quote}"</p>
+            </div>
+            <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+              <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover border border-[#C9A227]/50" />
+              <div>
+                <h4 className="font-display font-bold text-sm text-white">{t.name}</h4>
+                <p className="text-xs text-[#E9CE7E]">{t.role} • {t.location}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center gap-2 mt-8">
+        {TESTIMONIALS.map((_, i) => (
+          <button
+            key={i}
+            className={`w-2 h-2 rounded-full ${current === i ? 'bg-[#E9CE7E]' : 'bg-white/20'} transition-all`}
+            aria-label={`Go to testimonial ${i + 1}`}
+            onClick={() => setCurrent(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// --- NEW: mobile destination card swiper ---
+function MobileDestinationsSwiper() {
+  const [current, setCurrent] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const prev = () =>
+    setCurrent((prev) => (prev === 0 ? TRAVEL_PACKAGES.length - 1 : prev - 1));
+  const next = () =>
+    setCurrent((prev) => (prev + 1) % TRAVEL_PACKAGES.length);
+
+  function handleTouchStart(e: TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+  function handleTouchMove(e: TouchEvent) {
+    touchEndX.current = e.touches[0].clientX;
+  }
+  function handleTouchEnd() {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const dx = touchEndX.current - touchStartX.current;
+      if (Math.abs(dx) > 44) {
+        if (dx < 0) {
+          // swipe left, go to next
+          next();
+        } else {
+          // swipe right, go to prev
+          prev();
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  }
+
+  return (
+    <div className="relative w-full max-w-full mx-auto">
+      <div
+        className="reveal"
+        style={{
+          transition: 'transform 0.4s cubic-bezier(.76,0,.24,1)',
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {TRAVEL_PACKAGES.map((pkg, idx) => (
+          <div
+            key={pkg.id}
+            className={`
+              group relative rounded-2xl overflow-hidden aspect-[3/4] shadow-md cursor-pointer
+              absolute w-full left-0 top-0 transition-all duration-300
+              ${
+                idx === current
+                  ? 'opacity-100 z-10 relative translate-x-0 scale-100 pointer-events-auto visible'
+                  : 'opacity-0 z-0 pointer-events-none scale-90 left-0'
+              }
+            `}
+            style={{
+              visibility: idx === current ? "visible" : "hidden",
+              position: idx === current ? "relative" : "absolute",
+            }}
+          >
+            <img
+              src={pkg.image}
+              alt={pkg.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+              <span className="text-[11px] tracking-[0.14em] uppercase text-[#E9CE7E] mb-1.5 font-bold">
+                {pkg.country}
+              </span>
+              <h3 className="font-display text-2xl font-bold mb-1">{pkg.destination}</h3>
+              <p className="text-xs text-white/70 mb-4">{pkg.description.slice(0, 70)}...</p>
+              <a
+                href="#contact"
+                className="text-xs font-bold text-[#E9CE7E] inline-flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <span>Explore {pkg.destination}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center gap-2 mt-8">
+        {TRAVEL_PACKAGES.map((_, i) => (
+          <button
+            key={i}
+            className={`w-2 h-2 rounded-full ${current === i ? 'bg-[#C9A227]' : 'bg-black/10'} transition-all`}
+            aria-label={`Go to destination card ${i + 1}`}
+            onClick={() => setCurrent(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function App() {
   const [loaderHidden, setLoaderHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showBackTop, setShowBackTop] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaderHidden(true), 400);
@@ -96,7 +293,6 @@ export function App() {
             <div className="w-10 h-10 rounded-full bg-[#111111] flex items-center justify-center shadow-[0_0_0_1px_rgba(201,162,39,0.35)] overflow-hidden p-1">
               <img src="/src/assets/logo.png" alt="GT&T Logo" className="w-full h-full object-contain" />
             </div>
-            {/* <span className="font-display text-2xl font-semibold text-white tracking-wide"> */}
               <span className="font-display text-2xl font-semibold tracking-wide" style={{ color: "#C9A227" }}>
                 Gold Travels
               </span>
@@ -179,7 +375,8 @@ export function App() {
               Explore the World<br/>with <span className="italic bg-gradient-to-r from-[#E9CE7E] to-[#C9A227] bg-clip-text text-transparent">Confidence</span>
             </h1>
             <p className="text-white/80 text-lg max-w-[560px] mb-10 font-normal reveal in" style={{ transitionDelay: '0.2s' }}>
-              Your trusted partner for flights, visas, study abroad, vacations and unforgettable experiences planned with care, delivered without stress.
+              Your trusted partner for seamless travel experiences
+
             </p>
             <div className="flex gap-4 flex-wrap mb-14 reveal in" style={{ transitionDelay: '0.3s' }}>
               <a href="#contact" className="px-8 py-4 rounded-full font-bold text-sm bg-[#C9A227] text-[#1a1400] shadow-xl hover:-translate-y-1 transition-all">
@@ -205,14 +402,7 @@ export function App() {
         </div>
       </section>
 
-      {/* Quote Widget Section */}
-      <section className="pt-8 pb-16 bg-white relative z-20">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
-          <div className="max-w-4xl mx-auto sm:-mt-24 relative z-30 shadow-2xl rounded-2xl overflow-hidden bg-white border border-[#C9A227]/30">
-            {/* QuoteWidget was removed */}
-          </div>
-        </div>
-      </section>
+     
 
       {/* Services Section */}
       <section className="py-24 bg-white" id="services">
@@ -293,23 +483,27 @@ export function App() {
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Places our travelers keep going back to</h2>
             <p className="text-gray-600 mt-4 text-base">A shortlist of the routes we book most — each one planned door to door.</p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
-            {TRAVEL_PACKAGES.map((pkg) => (
-              <div key={pkg.id} className="group relative rounded-2xl overflow-hidden aspect-[3/4] shadow-md cursor-pointer">
-                <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                  <span className="text-[11px] tracking-[0.14em] uppercase text-[#E9CE7E] mb-1.5 font-bold">{pkg.country}</span>
-                  <h3 className="font-display text-2xl font-bold mb-1">{pkg.destination}</h3>
-                  <p className="text-xs text-white/70 mb-4">{pkg.description.slice(0, 70)}...</p>
-                  <a href="#contact" className="text-xs font-bold text-[#E9CE7E] inline-flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>Explore {pkg.destination}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
+          {/* MOBILE: swipe carousel; DESKTOP: grid */}
+          {isMobile ? (
+            <MobileDestinationsSwiper />
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+              {TRAVEL_PACKAGES.map((pkg) => (
+                <div key={pkg.id} className="group relative rounded-2xl overflow-hidden aspect-[3/4] shadow-md cursor-pointer">
+                  <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                    <span className="text-[11px] tracking-[0.14em] uppercase text-[#E9CE7E] mb-1.5 font-bold">{pkg.country}</span>
+                    <h3 className="font-display text-2xl font-bold mb-1">{pkg.destination}</h3>
+                    <p className="text-xs text-white/70 mb-4">{pkg.description.slice(0, 70)}...</p>
+                    <a href="#contact" className="text-xs font-bold text-[#E9CE7E] inline-flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span>Explore {pkg.destination}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -330,27 +524,7 @@ export function App() {
             <h2 className="text-3xl sm:text-4xl font-display font-semibold mt-4 mb-6">Your admission letter is just the beginning</h2>
             <p className="text-gray-600 text-base mb-8">We guide students from application to arrival — matching you with schools, handling your visa file and arranging travel so you land ready to start.</p>
             
-            <div className="flex flex-wrap gap-2.5 mb-8">
-              {[
-                'France',
-                'Italy',
-                'Barcelona',
-                'Doha',
-                'Zanzibar',
-                'Indonesia',
-                'Seychelles',
-                'Singapore',
-                'Greece',
-                'China',
-                'South Africa',
-                'UK'
-              ].map((country, idx) => (
-                <span key={idx} className="px-5 py-2.5 rounded-full border border-[#C9A227]/40 text-sm font-semibold text-[#111111] bg-[#C9A227]/5">
-                  {country}
-                </span>
-              ))}
-         
-            </div>
+            {/* Removed country list here */}
 
             <ul className="space-y-4 mb-10 text-gray-700 font-medium">
               <li className="flex items-center gap-3"><span className="text-[#9C7A1E]">✓</span> University admission support</li>
@@ -375,25 +549,29 @@ export function App() {
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-white">Trusted by travelers across Nigeria</h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.id} className="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between relative">
-                <Quote className="absolute top-6 right-6 w-10 h-10 text-white/10" />
-                <div>
-                  <div className="text-[#E9CE7E] text-sm tracking-widest mb-4">★★★★★</div>
-                  <p className="text-white/80 text-base italic leading-relaxed mb-8">"{t.quote}"</p>
-                </div>
-                <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                  <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover border border-[#C9A227]/50" />
+          {/* SWIPE on mobile, grid on desktop: */}
+          {isMobile ? (
+            <MobileTestimonialsSwiper />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
+              {TESTIMONIALS.map((t) => (
+                <div key={t.id} className="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between relative">
+                  <Quote className="absolute top-6 right-6 w-10 h-10 text-white/10" />
                   <div>
-                    <h4 className="font-display font-bold text-sm text-white">{t.name}</h4>
-                    <p className="text-xs text-[#E9CE7E]">{t.role} • {t.location}</p>
+                    <div className="text-[#E9CE7E] text-sm tracking-widest mb-4">★★★★★</div>
+                    <p className="text-white/80 text-base italic leading-relaxed mb-8">"{t.quote}"</p>
+                  </div>
+                  <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                    <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover border border-[#C9A227]/50" />
+                    <div>
+                      <h4 className="font-display font-bold text-sm text-white">{t.name}</h4>
+                      <p className="text-xs text-[#E9CE7E]">{t.role} • {t.location}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

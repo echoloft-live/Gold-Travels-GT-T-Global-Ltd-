@@ -212,7 +212,7 @@ export const TRAVEL_PACKAGES: TravelPackage[] = [
     duration: "5 Days / 4 Nights",
     priceNaira: "₦1,820,000",
     priceUSD: "$1,240",
-    image: "https://images.unsplash.com/photo-1518684079-8129efccf464?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1504870712357-65ea720d7d5d?auto=format&fit=crop&w=1200&q=80", // Real image: Doha skyline at dusk
     badge: "Luxury Qatar",
     highlights: ["5-Star Corniche Resort", "Desert Dune Safari", "Museum of Islamic Art", "Shopping at Villaggio Mall"],
     description: "Experience cutting-edge Qatari luxury: world-class hotels, vibrant souks, desert adventures, and modern architectural wonders.",
@@ -308,7 +308,7 @@ export const TRAVEL_PACKAGES: TravelPackage[] = [
     duration: "7 Days / 6 Nights",
     priceNaira: "₦2,980,000",
     priceUSD: "$2,050",
-    image: "https://images.unsplash.com/photo-1509228468518-c34e51a2eddd?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1200&q=80", // Real image: Beijing city skyline at night
     badge: "Asia Explorer",
     highlights: ["Central Beijing Hotel", "Great Wall Guided Excursion", "Forbidden City Tour", "Peking Duck Experience"],
     description: "Rich imperial history, architecture, culture and flavors: Experience the vibrant dynamism of China from its famed capital.",
