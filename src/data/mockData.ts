@@ -2,11 +2,11 @@ import type { ServiceInfo, TravelPackage, Testimonial } from '../types';
 
 export const COMPANY_INFO = {
   name: "Gold Travels and Tours (GT&T) Global Ltd",
-  handle: "Goldtravels.ng",
+  handle: "Goldtravels",
   phones: ["07056103924", "09026160471"],
   address: "FCT, Abuja, Nigeria",
   whatsappNumber: "2347056103924",
-  email: "concierge@goldtravels.ng",
+  email: "goldtravels.ng@gmail.com",
   hours: "Mon - Sat: 8:00 AM - 6:00 PM (WAT)"
 };
 

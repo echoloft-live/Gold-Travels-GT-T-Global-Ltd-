@@ -510,42 +510,64 @@ export function App() {
       {/* Study Abroad Section */}
       <section className="py-28 bg-[#F8F9FA]" id="study">
         <div className="max-w-[1240px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* IMAGE PANEL */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl reveal">
             <img 
-              src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=900&q=80" 
-              alt="Students celebrating study abroad" 
-              className="w-full h-[540px] object-cover" 
+              src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=900&q=80"
+              alt="Students celebrating study abroad"
+              className="w-full h-[540px] object-cover"
               loading="lazy"
-              style={{ backgroundColor: "#ececec" }} // fallback bg in case of load delay
+              style={{ backgroundColor: "#ececec" }}
             />
             <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-md rounded-xl p-5 shadow-xl flex items-center gap-4">
               <span className="font-display text-3xl font-bold text-[#9C7A1E]">5</span>
-              <span className="text-xs text-gray-600 font-medium">Countries with active admissions support</span>
+              <span className="text-xs text-gray-600 font-medium">
+                Countries with active admissions support
+              </span>
             </div>
-      
           </div>
+
+          {/* TEXT PANEL */}
           <div className="reveal">
-            <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2">
+            <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2 mb-3">
               Study Abroad
             </span>
-            <h2 className="text-3xl sm:text-4xl font-display font-semibold mt-4 mb-6">Your admission letter is just the beginning</h2>
-            <p className="text-gray-600 text-base mb-8">We guide students from application to arrival — matching you with schools, handling your visa file and arranging travel so you land ready to start.</p>
-            
-            {/* Removed country list here */}
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold mt-2 mb-5">
+              Your admission letter is just the beginning
+            </h2>
+            <p className="text-gray-600 text-base mb-7">
+              From application to arrival, we guide students each step of the way: matching you with great schools, handling your visa documentation, and organizing travel so you land ready for your next chapter.
+            </p>
 
-            <ul className="space-y-4 mb-10 text-gray-700 font-medium">
-              <li className="flex items-center gap-3"><span className="text-[#9C7A1E]">✓</span> University admission support</li>
-              <li className="flex items-center gap-3"><span className="text-[#9C7A1E]">✓</span> Student visa assistance</li>
-              <li className="flex items-center gap-3"><span className="text-[#9C7A1E]">✓</span> Flight and travel arrangements</li>
-              <li className="flex items-center gap-3"><span className="text-[#9C7A1E]">✓</span> Accommodation guidance on arrival</li>
+            <ul className="space-y-3 mb-9 text-gray-700 font-medium">
+              <li className="flex items-center gap-3">
+                <span className="inline-block text-[#9C7A1E] font-bold text-lg" aria-hidden>✓</span>
+                University admission support
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="inline-block text-[#9C7A1E] font-bold text-lg" aria-hidden>✓</span>
+                Student visa assistance
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="inline-block text-[#9C7A1E] font-bold text-lg" aria-hidden>✓</span>
+                Flight and travel arrangements
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="inline-block text-[#9C7A1E] font-bold text-lg" aria-hidden>✓</span>
+                Accommodation guidance on arrival
+              </li>
             </ul>
 
-            <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm bg-[#111111] text-[#E9CE7E] hover:shadow-xl hover:-translate-y-0.5 transition-all">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm bg-[#111111] text-[#E9CE7E] hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            >
               Start Your Application
             </a>
           </div>
         </div>
       </section>
+
 
       {/* Testimonials */}
       <section className="py-28 bg-[#111111] text-white relative overflow-hidden" id="testimonials">
@@ -688,6 +710,7 @@ export function App() {
                 <li className="font-mono">{COMPANY_INFO.phones[0]}</li>
                 <li className="font-mono">{COMPANY_INFO.phones[1]}</li>
                 <li className="font-mono">{COMPANY_INFO.handle}</li>
+                <li className="font-mono">{COMPANY_INFO.email}</li>
               </ul>
             </div>
           </div>
