@@ -511,11 +511,18 @@ export function App() {
       <section className="py-28 bg-[#F8F9FA]" id="study">
         <div className="max-w-[1240px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl reveal">
-            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80" alt="Students" className="w-full h-[540px] object-cover" />
+            <img 
+              src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=900&q=80" 
+              alt="Students celebrating study abroad" 
+              className="w-full h-[540px] object-cover" 
+              loading="lazy"
+              style={{ backgroundColor: "#ececec" }} // fallback bg in case of load delay
+            />
             <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-md rounded-xl p-5 shadow-xl flex items-center gap-4">
               <span className="font-display text-3xl font-bold text-[#9C7A1E]">5</span>
               <span className="text-xs text-gray-600 font-medium">Countries with active admissions support</span>
             </div>
+      
           </div>
           <div className="reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2">
