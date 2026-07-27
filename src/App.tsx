@@ -682,12 +682,12 @@ export function App() {
                   </div>
                 </div>
               </div>
-              <div className="relative z-10 mt-8">
+              {/* <div className="relative z-10 mt-8">
                 <div className="h-28 rounded-xl bg-white/5 border border-dashed border-[#C9A227]/40 flex items-center justify-center text-xs text-white/60 gap-2">
                   <MapPin className="w-4 h-4 text-[#E9CE7E]" />
                   <span>Map preview — FCT, Abuja</span>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="lg:col-span-7 bg-white border border-gray-100 rounded-2xl p-5 sm:p-10 shadow-sm">
               <ContactForm />
