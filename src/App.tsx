@@ -4,11 +4,13 @@ import type { TouchEvent } from 'react';
 import { COMPANY_INFO, SERVICES, TRAVEL_PACKAGES, TESTIMONIALS } from './data/mockData';
 import { ContactForm } from './components/ContactForm';
 import { WhatsAppButton } from './components/WhatsAppButton';
-import { Phone, Mail, MapPin, MessageCircle, ArrowRight, Award, ShieldCheck, Clock, Quote, Plane, FileCheck, GraduationCap, Building2, Car, Palmtree, HeartHandshake } from 'lucide-react';
+import {
+  Phone, Mail, MapPin, MessageCircle, ArrowRight, Award, ShieldCheck, Clock, Quote,
+  Plane, FileCheck, GraduationCap, Building2, Car, Palmtree, HeartHandshake
+} from 'lucide-react';
 
 import logo from "./assets/logo.png";
 import wlogo from "./assets/wlogo.png";
-
 
 const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Plane,
@@ -20,9 +22,8 @@ const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>>
   HeartHandshake,
 };
 
-// Swiper logic for mobile testimonials carousel
 function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
+  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" ? window.innerWidth < breakpoint : false);
 
   useEffect(() => {
     function handleResize() {
@@ -40,10 +41,8 @@ function MobileTestimonialsSwiper() {
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  // Go to previous slide
-  const prev = () => setCurrent((prev) => prev === 0 ? TESTIMONIALS.length - 1 : prev - 1);
-  // Go to next slide
-  const next = () => setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
+  const prev = () => setCurrent(prev => prev === 0 ? TESTIMONIALS.length - 1 : prev - 1);
+  const next = () => setCurrent(prev => (prev + 1) % TESTIMONIALS.length);
 
   function handleTouchStart(e: TouchEvent) {
     touchStartX.current = e.touches[0].clientX;
@@ -117,7 +116,6 @@ function MobileTestimonialsSwiper() {
   );
 }
 
-// --- NEW: mobile destination card swiper ---
 function MobileDestinationsSwiper() {
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef<number | null>(null);
@@ -139,10 +137,8 @@ function MobileDestinationsSwiper() {
       const dx = touchEndX.current - touchStartX.current;
       if (Math.abs(dx) > 44) {
         if (dx < 0) {
-          // swipe left, go to next
           next();
         } else {
-          // swipe right, go to prev
           prev();
         }
       }
@@ -278,9 +274,9 @@ export function App() {
     };
   }, []);
 
+  // Navbar and hero section: improved standard mobile spacing
   return (
     <div className="min-h-screen bg-white text-[#242220] font-sans selection:bg-[#C9A227] selection:text-white">
-      
       {/* Loader */}
       <div className={`fixed inset-0 z-50 bg-[#111111] flex items-center justify-center transition-opacity duration-700 ${loaderHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="w-16 h-16 rounded-full border border-[rgba(201,162,39,0.35)] flex items-center justify-center relative">
@@ -290,16 +286,37 @@ export function App() {
         </div>
       </div>
 
-      {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 py-6 ${isScrolled ? 'bg-[#111111]/90 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent'}`}>
-        <div className="max-w-full mx-auto px-4 sm:px-8 flex items-center justify-between">
-          <a href="#home" className="flex items-center space-x-3 group justify-start">
-            <div className="w-full h-14 flex items-center justify-start overflow-hidden p-1">
-              <img src={ logo} alt="GT&T Logo" className="w-full h-full object-contain" />
-            </div>
+      {/* Header - Improved spacing on mobile */}
+      <header
+        className={
+          `fixed top-0 left-0 right-0 z-40 transition-all duration-500 
+           ${isScrolled ? 'bg-[#111111]/90 backdrop-blur-md shadow-xl' : 'bg-transparent'}`
+        }
+      >
+        <div
+          className={
+            "max-w-full mx-auto flex items-center justify-between" +
+            " px-4 sm:px-8" +
+            " h-14 sm:h-[56px]" // h-14 => 56px mobile, 56px desktop
+          }
+          style={{
+            paddingTop: isMobile ? "0.25rem" : "1.25rem", // 4px/20px
+            paddingBottom: isMobile ? "0.25rem" : isScrolled ? "1rem" : "1.5rem" // 4/16/24px
+          }}
+        >
+          <a href="#home" className="flex items-center flex-shrink-0">
+            <img
+              src={logo}
+              alt="GT&T Logo"
+              className={[
+                'object-contain',
+                'w-auto',
+                'transition-all duration-200',
+                isMobile ? 'h-8 max-h-10' : 'h-10 max-h-12'
+              ].join(' ')}
+              style={{ minHeight: isMobile ? 32 : 38 }}
+            />
           </a>
-       
-
           <nav className="hidden lg:flex items-center space-x-8">
             <a href="#home" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">Home</a>
             <a href="#about" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">About</a>
@@ -309,15 +326,15 @@ export function App() {
             <a href="#testimonials" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">Testimonials</a>
             <a href="#contact" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">Contact</a>
           </nav>
-
           <div className="flex items-center space-x-4">
             <a href="#contact" className="hidden sm:inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm bg-[#C9A227] text-[#1a1400] shadow-lg hover:-translate-y-0.5 transition-all">
               Book Now
             </a>
-            <button 
+            <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden w-7 h-5 relative flex flex-col justify-between bg-transparent border-none cursor-pointer z-50"
               aria-label="Toggle menu"
+              tabIndex={0}
             >
               <span className={`w-full h-[1.5px] bg-white transition-all ${mobileMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`}></span>
               <span className={`w-full h-[1.5px] bg-white transition-all ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
@@ -325,10 +342,10 @@ export function App() {
             </button>
           </div>
         </div>
-
-        {/* Mobile Nav Drawer */}
+        {/* Mobile Nav Drawer - Improved vertical padding */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-0 left-0 w-full h-screen bg-[#111111] flex flex-col items-center justify-center space-y-6 z-40 px-8 animate-fade-in">
+          <div className="lg:hidden fixed top-0 left-0 w-full h-screen bg-[#111111] flex flex-col items-center justify-center space-y-6 z-40 px-8 animate-fade-in overflow-y-auto"
+            style={{ paddingTop: "1.5rem", paddingBottom: "1.5rem" }}>
             <a href="#home" onClick={() => setMobileMenuOpen(false)} className="text-xl font-semibold text-white">Home</a>
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-xl font-semibold text-white">About</a>
             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-xl font-semibold text-white">Services</a>
@@ -342,9 +359,32 @@ export function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[720px] flex items-end bg-[#111111] overflow-hidden" id="home">
+      <section
+        className={`
+          relative
+          flex items-end
+          bg-[#111111]
+          overflow-hidden
+          ${isMobile
+            ? "h-[82vh] min-h-[430px] pt-16 pb-8" // improved hero height and spacing on mobile
+            : "h-screen min-h-[720px] pt-28 pb-0"
+          }
+        `}
+        id="home"
+        style={{
+          minHeight: isMobile ? "430px" : "720px",
+          paddingTop: isMobile ? "4rem" : "112px",     // 4rem = 64px (standard for mobile nav+hero margin)
+          paddingBottom: isMobile ? "2rem" : "0px"     // 2rem = 32px on mobile hero bottom
+        }}
+      >
         {/* Hero Background with zoom animation */}
-        <div className="absolute inset-0 bg-cover bg-center filter brightness-90 hero-bg-anim" style={{ backgroundImage: 'linear-gradient(180deg, rgba(10,9,8,0.35) 0%, rgba(10,9,8,0.55) 55%, rgba(10,9,8,0.92) 100%), url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=80")' }}></div>
+        <div
+          className="absolute inset-0 bg-cover bg-center filter brightness-90 hero-bg-anim"
+          style={{
+            backgroundImage:
+              'linear-gradient(180deg, rgba(10,9,8,0.35) 0%, rgba(10,9,8,0.55) 55%, rgba(10,9,8,0.92) 100%), url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=80")'
+          }}
+        ></div>
 
         {/* Animated Flight Path SVG */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-55" viewBox="0 0 1200 800" preserveAspectRatio="none">
@@ -359,51 +399,50 @@ export function App() {
         </svg>
 
         {/* Floating Icons */}
-        <svg className="float-icon" style={{ top: '22%', left: '8%', width: '34px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+        <svg className="float-icon" style={{ top: '22%', left: '8%', width: '28px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
           <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.5V22l4-1 4 1v-1.5L13 19v-5.5l8 2.5z"/>
         </svg>
-        <svg className="float-icon" style={{ top: '16%', right: '12%', width: '30px', animationDelay: '1.5s' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+        <svg className="float-icon" style={{ top: '16%', right: '12%', width: '24px', animationDelay: '1.5s' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
           <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/>
         </svg>
 
-        <div className="relative z-10 w-full pb-24">
-          <div className="max-w-[1240px] mx-auto px-4 sm:px-8 max-w-[900px]">
+        <div className="relative z-10 w-full" style={{ paddingBottom: isMobile ? 0 : 96 }}>
+          <div className={`max-w-[1240px] mx-auto px-4 sm:px-8 ${isMobile ? "max-w-[95vw]" : "max-w-[900px]"}`}>
             <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold inline-flex items-center gap-2 mb-4 reveal in">
-              {/* <span className="w-7 h-[1px] bg-[#C9A227]"></span> */}
               Gold Travels & Tours (GT&T) Global Ltd
             </span>
-            <h1 className="text-white text-[clamp(40px,6vw,76px)] leading-[1.05] font-display font-semibold mb-5 reveal in" style={{ transitionDelay: '0.1s' }}>
-              Explore the World<br/>with <span className="italic bg-gradient-to-r from-[#E9CE7E] to-[#C9A227] bg-clip-text text-transparent">Confidence</span>
+            <h1 className="text-white text-[clamp(30px,6vw,76px)] leading-[1.05] font-display font-semibold mb-4 sm:mb-5 reveal in" style={{ transitionDelay: '0.1s' }}>
+              Explore the World<br />
+              with{" "}
+              <span className="italic bg-gradient-to-r from-[#E9CE7E] to-[#C9A227] bg-clip-text text-transparent">
+                Confidence
+              </span>
             </h1>
-            <p className="text-white/80 text-lg max-w-[560px] mb-10 font-normal reveal in" style={{ transitionDelay: '0.2s' }}>
+            <p className="text-white/80 text-base sm:text-lg max-w-[560px] mb-8 sm:mb-10 font-normal reveal in" style={{ transitionDelay: '0.2s' }}>
               Your trusted partner for seamless travel experiences
-
             </p>
-            <div className="flex gap-4 flex-wrap mb-14 reveal in" style={{ transitionDelay: '0.3s' }}>
-              <a href="#contact" className="px-8 py-4 rounded-full font-bold text-sm bg-[#C9A227] text-[#1a1400] shadow-xl hover:-translate-y-1 transition-all">
+            <div className="flex gap-3 sm:gap-4 flex-wrap mb-9 sm:mb-14 reveal in" style={{ transitionDelay: '0.3s' }}>
+              <a href="#contact" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-sm bg-[#C9A227] text-[#1a1400] shadow-xl hover:-translate-y-1 transition-all">
                 Book Your Trip
               </a>
-              <a href="#services" className="px-8 py-4 rounded-full font-bold text-sm bg-transparent border border-white/55 text-white hover:bg-white/10 hover:-translate-y-1 transition-all">
+              <a href="#services" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-sm bg-transparent border border-white/55 text-white hover:bg-white/10 hover:-translate-y-1 transition-all">
                 Get Visa Assistance
               </a>
             </div>
 
-            <div className="flex gap-6 sm:gap-12 border-t border-white/20 pt-7 flex-wrap reveal in" style={{ transitionDelay: '0.4s' }}>
-              <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="1000">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Happy Travelers</span></div>
-              <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="100">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Destinations</span></div>
-              <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="98">0</em>%</span><span className="text-xs uppercase tracking-wider text-white/60">Satisfaction</span></div>
-              <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="10">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Years Experience</span></div>
+            <div className="flex gap-6 sm:gap-12 border-t border-white/20 pt-5 sm:pt-7 flex-wrap reveal in" style={{ transitionDelay: '0.4s' }}>
+              <div><span className="font-display text-white text-2xl sm:text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="1000">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Happy Travelers</span></div>
+              <div><span className="font-display text-white text-2xl sm:text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="100">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Destinations</span></div>
+              <div><span className="font-display text-white text-2xl sm:text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="98">0</em>%</span><span className="text-xs uppercase tracking-wider text-white/60">Satisfaction</span></div>
+              <div><span className="font-display text-white text-2xl sm:text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="10">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Years Experience</span></div>
             </div>
           </div>
         </div>
-
-        <div className="absolute right-8 bottom-9 z-20 hidden md:flex flex-col items-center gap-2.5 text-white/60 text-[11px] tracking-[0.18em] uppercase">
+        <div className="absolute right-8 bottom-5 sm:bottom-9 z-20 hidden md:flex flex-col items-center gap-2.5 text-white/60 text-[11px] tracking-[0.18em] uppercase">
           <span>Scroll</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-white/70 to-transparent animate-pulse"></div>
         </div>
       </section>
-
-     
 
       {/* Services Section */}
       <section className="py-24 bg-white" id="services">
@@ -415,7 +454,6 @@ export function App() {
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Every step of your journey, arranged in one place</h2>
             <p className="text-gray-600 mt-4 text-base">From the first flight search to the last stamp in your passport, our consultants handle the details so your trip stays effortless.</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
             {SERVICES.map((s, idx) => (
               <div key={s.id} className="group bg-white border border-gray-200/80 rounded-2xl p-8 hover:bg-[#111111] hover:text-white transition-all duration-500 hover:-translate-y-1.5 shadow-sm relative overflow-hidden flex flex-col justify-between">
@@ -443,7 +481,7 @@ export function App() {
         <div className="max-w-[1240px] mx-auto px-8 relative z-10">
           <div className="max-w-2xl mb-16 reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold inline-flex items-center gap-2">
-               Why Choose Us
+              Why Choose Us
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-white">Travel planning that feels like a trusted second opinion</h2>
             <p className="text-white/60 mt-4 text-base">We've guided thousands of Nigerian travelers through flights, visas and relocations — with the paperwork handled and the guesswork removed.</p>
@@ -513,10 +551,10 @@ export function App() {
         <div className="max-w-[1240px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* IMAGE PANEL */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl reveal">
-            <img 
+            <img
               src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=900&q=80"
               alt="Students celebrating study abroad"
-              className="w-full h-[540px] object-cover"
+              className="w-full h-[380px] sm:h-[540px] object-cover"
               loading="lazy"
               style={{ backgroundColor: "#ececec" }}
             />
@@ -527,7 +565,6 @@ export function App() {
               </span>
             </div>
           </div>
-
           {/* TEXT PANEL */}
           <div className="reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2 mb-3">
@@ -539,7 +576,6 @@ export function App() {
             <p className="text-gray-600 text-base mb-7">
               From application to arrival, we guide students each step of the way: matching you with great schools, handling your visa documentation, and organizing travel so you land ready for your next chapter.
             </p>
-
             <ul className="space-y-3 mb-9 text-gray-700 font-medium">
               <li className="flex items-center gap-3">
                 <span className="inline-block text-[#9C7A1E] font-bold text-lg" aria-hidden>✓</span>
@@ -558,7 +594,6 @@ export function App() {
                 Accommodation guidance on arrival
               </li>
             </ul>
-
             <a
               href="#contact"
               className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm bg-[#111111] text-[#E9CE7E] hover:shadow-xl hover:-translate-y-0.5 transition-all"
@@ -568,7 +603,6 @@ export function App() {
           </div>
         </div>
       </section>
-
 
       {/* Testimonials */}
       <section className="py-28 bg-[#111111] text-white relative overflow-hidden" id="testimonials">
@@ -627,14 +661,12 @@ export function App() {
             <h2 className="text-3xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Tell us where you're headed</h2>
             <p className="text-gray-600 mt-4 text-base">Share a few details and a travel consultant will reach out within one business day.</p>
           </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 reveal">
             <div className="lg:col-span-5 bg-[#111111] text-white rounded-2xl p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_100%,rgba(201,162,39,0.18),transparent_60%)] pointer-events-none"></div>
               <div className="relative z-10">
                 <span className="text-xs tracking-[0.22em] uppercase text-[#E9CE7E] font-bold block mb-2">Gold Travels and Tours (GT&T) Global Ltd</span>
                 <h3 className="text-2xl font-display font-semibold mb-6 sm:mb-8">Reach us directly</h3>
-                
                 <div className="space-y-5">
                   <div className="flex gap-4 pb-5 border-b border-white/10">
                     <MapPin className="w-5 h-5 text-[#E9CE7E] shrink-0 mt-1" />
@@ -650,7 +682,6 @@ export function App() {
                   </div>
                 </div>
               </div>
-
               <div className="relative z-10 mt-8">
                 <div className="h-28 rounded-xl bg-white/5 border border-dashed border-[#C9A227]/40 flex items-center justify-center text-xs text-white/60 gap-2">
                   <MapPin className="w-4 h-4 text-[#E9CE7E]" />
@@ -658,7 +689,6 @@ export function App() {
                 </div>
               </div>
             </div>
-
             <div className="lg:col-span-7 bg-white border border-gray-100 rounded-2xl p-5 sm:p-10 shadow-sm">
               <ContactForm />
             </div>
@@ -670,30 +700,27 @@ export function App() {
       <footer className="bg-[#0A0A0C] text-white/60 pt-20 pb-10 border-t border-white/10">
         <div className="max-w-[1240px] mx-auto px-8">
           <div className="grid justify-start  grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
-           <div className="lg:col-span-2">
-  <a href="#home" className="flex items-center group justify-start">
-    <img
-                  src={ wlogo}
-      alt="GT&T Logo"
-      className="h-14 w-auto object-contain"
-    />
-  </a>
-  <p className="text-sm text-white/50 pt-2 max-w-sm leading-relaxed mb-6">
-    Nigeria's trusted travel partner for flights, visas, study abroad and unforgettable vacations.
-  </p>
-</div>
-       
-
+            <div className="lg:col-span-2">
+              <a href="#home" className="flex items-center group justify-start">
+                <img
+                  src={wlogo}
+                  alt="GT&T Logo"
+                  className="h-10 sm:h-14 w-auto object-contain transition-all duration-200"
+                />
+              </a>
+              <p className="text-sm text-white/50 pt-2 max-w-sm leading-relaxed mb-6">
+                Nigeria's trusted travel partner for flights, visas, study abroad and unforgettable vacations.
+              </p>
+            </div>
             <div>
               <h5 className="text-white text-xs tracking-wider uppercase font-bold mb-6">Services</h5>
               <ul className="space-y-3 text-sm">
                 <li><a href="#services" className="hover:text-[#E9CE7E] transition-colors">Flight Booking</a></li>
                 <li><a href="#services" className="hover:text-[#E9CE7E] transition-colors">Visa Assistance</a></li>
                 <li><a href="#study" className="hover:text-[#E9CE7E] transition-colors">Study Abroad</a></li>
-                <li><a href="#packages" className="hover:text-[#E9CE7E] transition-colors">Vacation Packages</a></li>
+                <li><a href="#destinations" className="hover:text-[#E9CE7E] transition-colors">Vacation Packages</a></li>
               </ul>
             </div>
-
             <div>
               <h5 className="text-white text-xs tracking-wider uppercase font-bold mb-6">Company</h5>
               <ul className="space-y-3 text-sm">
@@ -703,7 +730,6 @@ export function App() {
                 <li><a href="#contact" className="hover:text-[#E9CE7E] transition-colors">Contact</a></li>
               </ul>
             </div>
-
             <div>
               <h5 className="text-white text-xs tracking-wider uppercase font-bold mb-6">Contact</h5>
               <ul className="space-y-3 text-sm">
@@ -711,11 +737,10 @@ export function App() {
                 <li className="font-mono">{COMPANY_INFO.phones[0]}</li>
                 <li className="font-mono">{COMPANY_INFO.phones[1]}</li>
                 <li className="font-mono">{COMPANY_INFO.handle}</li>
-                <li className="font-mono">{COMPANY_INFO.email}</li>
+                <li><a href={`mailto:${COMPANY_INFO.email}`} className="font-mono hover:text-[#E9CE7E] transition-colors">{COMPANY_INFO.email}</a></li>
               </ul>
             </div>
           </div>
-
           <div className="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-white/40">
             <span>© {new Date().getFullYear()} Gold Travels and Tours (GT&T) Global Ltd. All Rights Reserved.</span>
             <span>Designed for seamless travel, everywhere.</span>
@@ -736,7 +761,6 @@ export function App() {
           ↑
         </button>
       )}
-
     </div>
   );
 }
