@@ -6,6 +6,10 @@ import { ContactForm } from './components/ContactForm';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Phone, Mail, MapPin, MessageCircle, ArrowRight, Award, ShieldCheck, Clock, Quote, Plane, FileCheck, GraduationCap, Building2, Car, Palmtree, HeartHandshake } from 'lucide-react';
 
+import logo from "./assets/logo.png";
+import wlogo from "./assets/wlogo.png";
+
+
 const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Plane,
   FileCheck,
@@ -291,7 +295,7 @@ export function App() {
         <div className="max-w-full mx-auto px-4 sm:px-8 flex items-center justify-between">
           <a href="#home" className="flex items-center space-x-3 group justify-start">
             <div className="w-full h-14 flex items-center justify-start overflow-hidden p-1">
-              <img src="/src/assets/logo.png" alt="GT&T Logo" className="w-full h-full object-contain" />
+              <img src={ logo} alt="GT&T Logo" className="w-full h-full object-contain" />
             </div>
           </a>
        
@@ -669,7 +673,7 @@ export function App() {
            <div className="lg:col-span-2">
   <a href="#home" className="flex items-center group justify-start">
     <img
-      src="/src/assets/wlogo.png"
+                  src={ wlogo}
       alt="GT&T Logo"
       className="h-14 w-auto object-contain"
     />
