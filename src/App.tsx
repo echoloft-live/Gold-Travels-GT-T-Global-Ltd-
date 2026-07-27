@@ -705,7 +705,13 @@ export function App() {
                 <img
                   src={wlogo}
                   alt="GT&T Logo"
-                  className="h-10 sm:h-14 w-auto object-contain transition-all duration-200"
+                  style={{
+                    height: '38px', // restrict max display height
+                    maxHeight: '38px',
+                    minHeight: '28px',
+                    width: 'auto',
+                  }}
+                  className="footer-logo object-contain transition-all duration-200"
                 />
               </a>
               <p className="text-sm text-white/50 pt-2 max-w-sm leading-relaxed mb-6">
