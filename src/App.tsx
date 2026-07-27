@@ -289,12 +289,12 @@ export function App() {
       {/* Header */}
       <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 py-6 ${isScrolled ? 'bg-[#111111]/90 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent'}`}>
         <div className="max-w-full mx-auto px-4 sm:px-8 flex items-center justify-between">
-          <a href="#home" className="flex items-center space-x-3 group">
-            <div className="w-full h-14 flex items-center justify-center overflow-hidden p-1">
+          <a href="#home" className="flex items-center space-x-3 group justify-start">
+            <div className="w-full h-14 flex items-center justify-start overflow-hidden p-1">
               <img src="/src/assets/logo.png" alt="GT&T Logo" className="w-full h-full object-contain" />
             </div>
-         
-            </a>
+          </a>
+       
 
           <nav className="hidden lg:flex items-center space-x-8">
             <a href="#home" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">Home</a>
@@ -665,20 +665,20 @@ export function App() {
       {/* Footer */}
       <footer className="bg-[#0A0A0C] text-white/60 pt-20 pb-10 border-t border-white/10">
         <div className="max-w-[1240px] mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
-            <div className="lg:col-span-2">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center border border-[#C9A227]/60 overflow-hidden p-1">
-                  <img src="/src/assets/logo.png" alt="GT&T Logo" className="w-full h-full object-contain" />
-                </div>
-                <span className="font-display text-2xl font-semibold text-white tracking-wide">
-                  Gold <em className="not-italic bg-gradient-to-r from-[#E9CE7E] to-[#C9A227] bg-clip-text text-transparent">Travels</em>.ng
-                </span>
-              </div>
-              <p className="text-sm text-white/50 max-w-sm leading-relaxed mb-6">
-                Nigeria's trusted travel partner for flights, visas, study abroad and unforgettable vacations.
-              </p>
-            </div>
+          <div className="grid justify-start  grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
+           <div className="lg:col-span-2">
+  <a href="#home" className="flex items-center group justify-start">
+    <img
+      src="/src/assets/wlogo.png"
+      alt="GT&T Logo"
+      className="h-14 w-auto object-contain"
+    />
+  </a>
+  <p className="text-sm text-white/50 pt-2 max-w-sm leading-relaxed mb-6">
+    Nigeria's trusted travel partner for flights, visas, study abroad and unforgettable vacations.
+  </p>
+</div>
+       
 
             <div>
               <h5 className="text-white text-xs tracking-wider uppercase font-bold mb-6">Services</h5>
