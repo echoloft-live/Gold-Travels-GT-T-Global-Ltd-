@@ -385,7 +385,7 @@ export function App() {
             </div>
 
             <div className="flex gap-6 sm:gap-12 border-t border-white/20 pt-7 flex-wrap reveal in" style={{ transitionDelay: '0.4s' }}>
-              <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="5000">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Happy Travelers</span></div>
+              <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="1000">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Happy Travelers</span></div>
               <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="100">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Destinations</span></div>
               <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="98">0</em>%</span><span className="text-xs uppercase tracking-wider text-white/60">Satisfaction</span></div>
               <div><span className="font-display text-white text-3xl font-semibold block"><em className="not-italic text-[#E9CE7E]" data-count="10">0</em>+</span><span className="text-xs uppercase tracking-wider text-white/60">Years Experience</span></div>
