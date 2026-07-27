@@ -288,14 +288,11 @@ export function App() {
 
       {/* Header */}
       <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 py-6 ${isScrolled ? 'bg-[#111111]/90 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent'}`}>
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8 flex items-center justify-between">
+        <div className="max-w-full mx-auto px-4 sm:px-8 flex items-center justify-between">
           <a href="#home" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-full bg-[#111111] flex items-center justify-center shadow-[0_0_0_1px_rgba(201,162,39,0.35)] overflow-hidden p-1">
+            <div className="w-full h-14 flex items-center justify-center overflow-hidden p-1">
               <img src="/src/assets/logo.png" alt="GT&T Logo" className="w-full h-full object-contain" />
             </div>
-              <span className="font-display text-2xl font-semibold tracking-wide" style={{ color: "#C9A227" }}>
-                Gold Travels
-              </span>
          
             </a>
 
