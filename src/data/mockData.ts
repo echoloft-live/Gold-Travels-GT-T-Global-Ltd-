@@ -367,7 +367,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "Getting my UK Tier 4 study visa and booking my flight seemed daunting until I engaged GT&T. Their visa desk is extraordinarily thorough. Got my visa approved without any hassle!",
     serviceUsed: "Study Abroad & Visa",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+    image: "/testimonials/emeka.jpeg"
   },
   {
     id: "3",
@@ -377,7 +377,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "I use GT&T for all my corporate flights and Dubai family holidays. Their 24/7 responsiveness on WhatsApp is unmatched in Nigeria. Truly a world-class agency.",
     serviceUsed: "Flight Booking & Packages",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
+    image: "/testimonials/fatima.jpeg"
   }
 ];
 
