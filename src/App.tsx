@@ -480,7 +480,7 @@ export function App() {
               Why Choose Us
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-white">Travel planning that feels like a trusted second opinion</h2>
-            <p className="text-white/60 mt-4 text-base">We've guided thousands of Nigerian travelers through flights, visas and relocations — with the paperwork handled and the guesswork removed.</p>
+            <p className="text-white/60 mt-4 text-base">Travel planning you can trust from start to finish.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
