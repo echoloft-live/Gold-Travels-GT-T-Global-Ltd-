@@ -6,7 +6,7 @@ export const COMPANY_INFO = {
   phones: ["07056103924", "09026160471"],
   address: "FCT, Abuja, Nigeria",
   whatsappNumber: "2347056103924",
-  email: "goldtravels.ng@gmail.com",
+  email: "Info@goldtravels.ng",
   hours: "Mon - Sat: 8:00 AM - 6:00 PM (WAT)"
 };
 
