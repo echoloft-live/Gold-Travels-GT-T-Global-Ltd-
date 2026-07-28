@@ -357,7 +357,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "GT&T handled our destination honeymoon to the Maldives with absolute perfection. From the VIP airport reception in Abuja to our overwater bungalow, everything was seamless.",
     serviceUsed: "Destination Honeymoon",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+    image: "/testimonials/adebayos.jpeg"
   },
   {
     id: "2",
