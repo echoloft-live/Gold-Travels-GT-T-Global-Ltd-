@@ -480,7 +480,7 @@ export function App() {
               Why Choose Us
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-white">Travel planning that feels like a trusted second opinion</h2>
-            <p className="text-white/60 mt-4 text-base">We've guided thousands of Nigerian travelers through flights, visas and relocations with the paperwork handled and the guesswork removed.</p>
+            <p className="text-white/60 mt-4 text-base">We've guided thousands of Nigerian travelers through flights, visas and relocations — with the paperwork handled and the guesswork removed.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
@@ -516,7 +516,7 @@ export function App() {
               Featured Destinations
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Places our travelers keep going back to</h2>
-            <p className="text-gray-600 mt-4 text-base">A shortlist of the routes we book most, each one planned door to door.</p>
+            <p className="text-gray-600 mt-4 text-base">A shortlist of the routes we book most — each one planned door to door.</p>
           </div>
           {isMobile ? (
             <MobileDestinationsSwiper />
@@ -707,7 +707,7 @@ export function App() {
               {/* Social Media Handles: TikTok & Instagram */}
               <div className="flex items-center gap-4 mt-4">
                 <a
-                  href="https://www.instagram.com/goldtravels.ng"
+                  href="https://instagram.com/goldtravels.ng"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C9A227] hover:text-[#111111] flex items-center justify-center transition-all text-white"
@@ -716,7 +716,7 @@ export function App() {
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </a>
                 <a
-                  href="https://www.tiktok.com/@goldtravels.ng"
+                  href="https://tiktok.com/@goldtravels.ng"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C9A227] hover:text-[#111111] flex items-center justify-center transition-all text-white"
@@ -766,10 +766,10 @@ export function App() {
       </footer>
 
       {/* Floating WhatsApp */}
-      {!isMobile && <WhatsAppButton />}
+      <WhatsAppButton />
 
       {/* Back to Top */}
-      {!isMobile && showBackTop && (
+      {showBackTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#111111] text-[#E9CE7E] flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
