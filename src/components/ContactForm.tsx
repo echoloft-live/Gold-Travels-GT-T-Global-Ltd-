@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Send, MessageCircle, CheckCircle2 } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import confetti from 'canvas-confetti';
 
