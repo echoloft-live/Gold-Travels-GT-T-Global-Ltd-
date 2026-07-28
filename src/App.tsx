@@ -753,7 +753,13 @@ export function App() {
                 <li>FCT, Abuja, Nigeria</li>
                 <li className="font-mono">{COMPANY_INFO.phones[0]}</li>
                 <li className="font-mono">{COMPANY_INFO.phones[1]}</li>
-                <li><a href={`mailto:${COMPANY_INFO.email}`} className="font-mono hover:text-[#E9CE7E] transition-colors">{COMPANY_INFO.email}</a></li>
+                <li>
+                  <a href={`mailto:${COMPANY_INFO.email}`} className="font-mono hover:text-[#E9CE7E] transition-colors">{COMPANY_INFO.email}</a>
+                </li>
+                <li>
+                  <a href={`mailto:${COMPANY_INFO.additionalEmail}`} className="font-mono hover:text-[#E9CE7E] transition-colors">{COMPANY_INFO.additionalEmail}</a>
+                </li>
+           
               </ul>
             </div>
           </div>
