@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 import logo from "./assets/logo.png";
-import wlogo from "./assets/wlogo.png";
+const wlogo = logo;
 
 const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Plane,
@@ -80,8 +80,8 @@ function MobileTestimonialsSwiper() {
           <div
             key={t.id}
             className={`bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between relative absolute w-full left-0 top-0 transition-all duration-300
-                ${idx === current ? 'opacity-100 z-10 relative translate-x-0 scale-100 pointer-events-auto visible' : 'opacity-0 z-0 pointer-events-none scale-90 left-0'}
-             `}
+              ${idx === current ? 'opacity-100 z-10 relative translate-x-0 scale-100 pointer-events-auto visible' : 'opacity-0 z-0 pointer-events-none scale-90 left-0'}
+            `}
             style={{
               visibility: idx === current ? "visible" : "hidden",
               position: idx === current ? "relative" : "absolute",
@@ -274,9 +274,9 @@ export function App() {
     };
   }, []);
 
-  // Navbar and hero section: improved standard mobile spacing
   return (
     <div className="min-h-screen bg-white text-[#242220] font-sans selection:bg-[#C9A227] selection:text-white">
+      
       {/* Loader */}
       <div className={`fixed inset-0 z-50 bg-[#111111] flex items-center justify-center transition-opacity duration-700 ${loaderHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <div className="w-16 h-16 rounded-full border border-[rgba(201,162,39,0.35)] flex items-center justify-center relative">
@@ -286,7 +286,7 @@ export function App() {
         </div>
       </div>
 
-      {/* Header - Improved spacing on mobile */}
+      {/* Header */}
       <header
         className={
           `fixed top-0 left-0 right-0 z-40 transition-all duration-500 
@@ -297,11 +297,11 @@ export function App() {
           className={
             "max-w-full mx-auto flex items-center justify-between" +
             " px-4 sm:px-8" +
-            " h-14 sm:h-[56px]" // h-14 => 56px mobile, 56px desktop
+            " h-14 sm:h-[56px]"
           }
           style={{
-            paddingTop: isMobile ? "0.25rem" : "1.25rem", // 4px/20px
-            paddingBottom: isMobile ? "0.25rem" : isScrolled ? "1rem" : "1.5rem" // 4/16/24px
+            paddingTop: isMobile ? "0.25rem" : "1.25rem",
+            paddingBottom: isMobile ? "0.25rem" : isScrolled ? "1rem" : "1.5rem"
           }}
         >
           <a href="#home" className="flex items-center flex-shrink-0">
@@ -342,7 +342,6 @@ export function App() {
             </button>
           </div>
         </div>
-        {/* Mobile Nav Drawer - Improved vertical padding */}
         {mobileMenuOpen && (
           <div className="lg:hidden fixed top-0 left-0 w-full h-screen bg-[#111111] flex flex-col items-center justify-center space-y-6 z-40 px-8 animate-fade-in overflow-y-auto"
             style={{ paddingTop: "1.5rem", paddingBottom: "1.5rem" }}>
@@ -366,18 +365,17 @@ export function App() {
           bg-[#111111]
           overflow-hidden
           ${isMobile
-            ? "h-[82vh] min-h-[430px] pt-16 pb-8" // improved hero height and spacing on mobile
+            ? "h-[82vh] min-h-[430px] pt-16 pb-8"
             : "h-screen min-h-[720px] pt-28 pb-0"
           }
         `}
         id="home"
         style={{
           minHeight: isMobile ? "430px" : "720px",
-          paddingTop: isMobile ? "4rem" : "112px",     // 4rem = 64px (standard for mobile nav+hero margin)
-          paddingBottom: isMobile ? "2rem" : "0px"     // 2rem = 32px on mobile hero bottom
+          paddingTop: isMobile ? "4rem" : "112px",
+          paddingBottom: isMobile ? "2rem" : "0px"
         }}
       >
-        {/* Hero Background with zoom animation */}
         <div
           className="absolute inset-0 bg-cover bg-center filter brightness-90 hero-bg-anim"
           style={{
@@ -386,7 +384,6 @@ export function App() {
           }}
         ></div>
 
-        {/* Animated Flight Path SVG */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-55" viewBox="0 0 1200 800" preserveAspectRatio="none">
           <defs>
             <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
@@ -398,7 +395,6 @@ export function App() {
           <path className="route-path" d="M -50 620 Q 300 400 620 500 T 1250 260"/>
         </svg>
 
-        {/* Floating Icons */}
         <svg className="float-icon" style={{ top: '22%', left: '8%', width: '28px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
           <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.5V22l4-1 4 1v-1.5L13 19v-5.5l8 2.5z"/>
         </svg>
@@ -522,7 +518,6 @@ export function App() {
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-[#111111]">Places our travelers keep going back to</h2>
             <p className="text-gray-600 mt-4 text-base">A shortlist of the routes we book most — each one planned door to door.</p>
           </div>
-          {/* MOBILE: swipe carousel; DESKTOP: grid */}
           {isMobile ? (
             <MobileDestinationsSwiper />
           ) : (
@@ -549,7 +544,6 @@ export function App() {
       {/* Study Abroad Section */}
       <section className="py-28 bg-[#F8F9FA]" id="study">
         <div className="max-w-[1240px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* IMAGE PANEL */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl reveal">
             <img
               src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=900&q=80"
@@ -565,7 +559,6 @@ export function App() {
               </span>
             </div>
           </div>
-          {/* TEXT PANEL */}
           <div className="reveal">
             <span className="text-xs tracking-[0.22em] uppercase text-[#9C7A1E] font-bold inline-flex items-center gap-2 mb-3">
               Study Abroad
@@ -613,7 +606,6 @@ export function App() {
             </span>
             <h2 className="text-4xl sm:text-5xl font-display font-semibold mt-4 text-white">Trusted by travelers across Nigeria</h2>
           </div>
-          {/* SWIPE on mobile, grid on desktop: */}
           {isMobile ? (
             <MobileTestimonialsSwiper />
           ) : (
@@ -682,12 +674,6 @@ export function App() {
                   </div>
                 </div>
               </div>
-              {/* <div className="relative z-10 mt-8">
-                <div className="h-28 rounded-xl bg-white/5 border border-dashed border-[#C9A227]/40 flex items-center justify-center text-xs text-white/60 gap-2">
-                  <MapPin className="w-4 h-4 text-[#E9CE7E]" />
-                  <span>Map preview — FCT, Abuja</span>
-                </div>
-              </div> */}
             </div>
             <div className="lg:col-span-7 bg-white border border-gray-100 rounded-2xl p-5 sm:p-10 shadow-sm">
               <ContactForm />
@@ -696,17 +682,17 @@ export function App() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer with TikTok and Instagram handles */}
       <footer className="bg-[#0A0A0C] text-white/60 pt-20 pb-10 border-t border-white/10">
         <div className="max-w-[1240px] mx-auto px-8">
-          <div className="grid justify-start  grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
+          <div className="grid justify-start grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
             <div className="lg:col-span-2">
               <a href="#home" className="flex items-center group justify-start">
                 <img
                   src={wlogo}
                   alt="GT&T Logo"
                   style={{
-                    height: '38px', // restrict max display height
+                    height: '38px',
                     maxHeight: '38px',
                     minHeight: '28px',
                     width: 'auto',
@@ -717,7 +703,30 @@ export function App() {
               <p className="text-sm text-white/50 pt-2 max-w-sm leading-relaxed mb-6">
                 Nigeria's trusted travel partner for flights, visas, study abroad and unforgettable vacations.
               </p>
+              
+              {/* Social Media Handles: TikTok & Instagram */}
+              <div className="flex items-center gap-4 mt-4">
+                <a
+                  href="https://www.instagram.com/goldtravels.ng"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C9A227] hover:text-[#111111] flex items-center justify-center transition-all text-white"
+                  aria-label="Instagram"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                </a>
+                <a
+                  href="https://www.tiktok.com/@goldtravels.ng"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C9A227] hover:text-[#111111] flex items-center justify-center transition-all text-white"
+                  aria-label="TikTok"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                </a>
+              </div>
             </div>
+
             <div>
               <h5 className="text-white text-xs tracking-wider uppercase font-bold mb-6">Services</h5>
               <ul className="space-y-3 text-sm">
@@ -727,6 +736,7 @@ export function App() {
                 <li><a href="#destinations" className="hover:text-[#E9CE7E] transition-colors">Vacation Packages</a></li>
               </ul>
             </div>
+
             <div>
               <h5 className="text-white text-xs tracking-wider uppercase font-bold mb-6">Company</h5>
               <ul className="space-y-3 text-sm">
@@ -736,17 +746,18 @@ export function App() {
                 <li><a href="#contact" className="hover:text-[#E9CE7E] transition-colors">Contact</a></li>
               </ul>
             </div>
+
             <div>
               <h5 className="text-white text-xs tracking-wider uppercase font-bold mb-6">Contact</h5>
               <ul className="space-y-3 text-sm">
                 <li>FCT, Abuja, Nigeria</li>
                 <li className="font-mono">{COMPANY_INFO.phones[0]}</li>
                 <li className="font-mono">{COMPANY_INFO.phones[1]}</li>
-                {/* <li className="font-mono">{COMPANY_INFO.handle}</li> */}
                 <li><a href={`mailto:${COMPANY_INFO.email}`} className="font-mono hover:text-[#E9CE7E] transition-colors">{COMPANY_INFO.email}</a></li>
               </ul>
             </div>
           </div>
+
           <div className="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-white/40">
             <span>© {new Date().getFullYear()} Gold Travels and Tours (GT&T) Global Ltd. All Rights Reserved.</span>
             <span>Designed for seamless travel, everywhere.</span>
